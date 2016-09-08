@@ -1,0 +1,15 @@
+{
+  "name": "pre-rest",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Madhu Kumar D S <madhudskumar@live.in>",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "command-line-arguments": "^1.1.1",
+    "express": "^4.14.0"
+  }
+}
