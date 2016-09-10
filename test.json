@@ -1,3 +1,4 @@
 [
-  {"src":"./package.json", "path":"test"}
+  {"src":"./package.json", "path":"super"},
+  {"src":"./test.json", "path":"test"}
 ]
