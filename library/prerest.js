@@ -1,10 +1,10 @@
 var fs = require('fs'),
     app = require('express')(),
     cla = require('command-line-args'),
-    npm = require('./package.json'),
-    chalk = require('chalk')
+    npm = require('./../package.json'),
+    chalk = require('chalk');
 
-const claOpt = [
+/*const claOpt = [
     { name: 'src', type: String, alias:'s', multiple: false, defaultOption: false },
     { name: 'help', alias: 'h', type: Boolean, defaultOption: true},
     { name: 'port', alias: 'p', type: Number },
@@ -25,12 +25,29 @@ else if(opt.help && !opt.version){
              res.json(JSON.parse(data));
          });
      });
-    
+
     app.listen((opt.port || 7777), function () {
         console.log("running on port : " + (opt.port || 7777));
     });
 } else if(!(opt.src || opt.help || opt.version)){
     console.log('Not a valid option. --help for more');
-}
+}*/
 
-console.log(opt)
+module.exports = function () {
+    return {
+        createPath:function (src, path) {
+            app.get((path?('/' + path.toString()):'/'), function (req, res) {
+                fs.readFile(src, function (err, data) {
+                    if(err) console.log(err);
+
+                    res.json(JSON.parse(data));
+                })
+            })
+        },
+        createServer:function (port) {
+            app.listen((port || 7777), function () {
+                console.log("running on port : " + (port || 7777));
+            });
+        }
+    }
+}
