@@ -1,4 +1,7 @@
-[
-  {"src":"./package.json", "path":"super"},
-  {"src":"./test.json", "path":"test"}
-]
+{
+  "root":"./pack",
+  "multiple":[
+    {"src":"package.json", "path":"duper"},
+    {"src":"test.json", "path":"test"}
+  ]
+}

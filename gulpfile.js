@@ -2,7 +2,8 @@ var gulp = require('gulp'),
     cla = require('command-line-args'),
     chalk = require('chalk'),
     npm = require('./package.json'),
-    prerest = require('./library/prerest')();
+    nodemon = require('gulp-nodemon'),
+    prerest = require('./lib/prerest');
 
 const claOpt = [
     { name: 'src', type: String, alias:'s', multiple: false, defaultOption: false },
@@ -13,7 +14,8 @@ const claOpt = [
 ];
 
 var opt = cla(claOpt),
-    port = 0;
+    port = true;
+
 
 gulp.task('serve', function () {
     if(opt.version && !opt.help) console.log(npm.version);
@@ -25,18 +27,40 @@ gulp.task('serve', function () {
         console.log("\t--version|-v versionNumber");
     }else if(opt.src || opt.multiple){
         if (opt.src && !opt.multiple) {
-            prerest.createPath(opt.src);
-            gulp.watch(opt.src, ['serve']);
+            var url = {
+                src:opt.src,
+                path:undefined
+            }
+            prerest(url, opt.port, true);
+            gulp.watch(opt.src, ['restart']);
         }else {
             var urlConstructor = require('./' + opt.multiple.toString().trim());
-            urlConstructor.forEach(function (url) {
-                prerest.createPath(url.src, url.path);
-            })
+                path = urlConstructor.root.toString().concat("\\");
+            if(path){
+                var urlArray = []
+                urlConstructor.multiple.forEach(function (url) {
+                    urlArray.push({
+                        src:path.concat(url.src),
+                        path:url.path
+                    });
+                })
+                prerest(urlArray, opt.port, false);
+                gulp.watch(opt.multiple, ['restart']);
+            }else{
+                console.log(chalk.white.bold("No root Defined"));
+                return;
+            };
         }
-        if(!port++) prerest.createServer(opt.port);
-    }else if(opt.multiple){
-
     }else if(!(opt.src || opt.help || opt.version || opt.multiple)){
         console.log('Not a valid option. --help for more');
     }
 });
+
+gulp.task('restart', function () {
+    nodemon({
+        script: "./lib/prerest.js",
+        tasks: ['serve'],
+        ext: 'js json',
+        env: { 'NODE_ENV': 'development' }
+    })
+})
