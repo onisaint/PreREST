@@ -27,4 +27,4 @@ for multiple paths create a source file with
 ```
 for multiple paths do not give 'path' as '/' as it will be used for listing the available paths
 
-licence : GNU - 3.0
+licence : GPL - 3.0
