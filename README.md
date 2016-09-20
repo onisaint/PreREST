@@ -18,7 +18,7 @@ then
 for multiple paths create a source file with
 ```
     {
-      "root":<source>,
+      "root":<sourceDirectory>,
       "multiple":[
         {"src":<filename1>, "path":<urlPath1>},
         {"src":<filename2>, "path":<urlPath2>}
