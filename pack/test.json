@@ -1,7 +1,0 @@
-{
-  "root":"./",
-  "multiple":[
-    {"src":"package.json", "path":"hello"},
-    {"src":"test.json", "path":"test"}
-  ]
-}

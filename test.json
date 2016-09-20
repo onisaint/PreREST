@@ -1,7 +1,7 @@
 {
   "root":"./pack",
   "multiple":[
-    {"src":"package.json", "path":"duper"},
-    {"src":"test.json", "path":"test"}
+    {"src":"e1.json", "path":"user"},
+    {"src":"e2.json", "path":"year"}
   ]
 }
