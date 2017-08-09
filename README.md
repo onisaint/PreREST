@@ -1,5 +1,5 @@
-#PreREST
-###Front end development helper
+# PreREST
+### Front end development helper
 For front-end development an exact representation
 of the data from the server helps minimize the
 development cycle. For this to happen a server has to
